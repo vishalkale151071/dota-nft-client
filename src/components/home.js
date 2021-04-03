@@ -7,10 +7,16 @@ import Button from 'react-bootstrap/Button';
 import './styles/style.css';
 import Form from 'react-bootstrap/Form';
 import ItemCard from './ItemCard';
+// import * as heroData from '../metaData/Heros.json'; heros json data from local file
+// import * as itemData from '../metaData/Items.json'; items json data from local file
+
 const Home = ({account, contract}) => {
 
-    const [items, setItems] = useState([]);
-    const [heros, setHeros] = useState([]);
+    const [items, setItems] = useState([]); //items to hold all users items
+    const [heros, setHeros] = useState([]); //heros to hold all users heros
+    const [heroMetaData, setHeroMetaData] = useState(null); // metadata of heros
+    const [itemMetaData, setitemMetaData] = useState(null); // metadata od items
+    
     useEffect(() => {
         contract.methods.getItemNFTs(account).call((error, result) => {
             if(result){
@@ -19,7 +25,7 @@ const Home = ({account, contract}) => {
             if(error){
                 console.log(error);
             }
-        });
+        });// get all yours heros
 
         contract.methods.getHeroNFTs(account).call((error, result) => {
             if(result){
@@ -28,10 +34,26 @@ const Home = ({account, contract}) => {
             if(error){
                 console.log(error);
             }
-        });
+        });// get users all items
+
+        //setHeroMetaData(heroData.default); heros json data from local file
+        //setitemMetaData(itemData.default); items json data from local file
+        fetch("https://gateway.pinata.cloud/ipfs/QmVNdiUfYGZhfAcBpFj87KmaYDU9rbSU25Wjgnu1aJHwDu")
+        .then(response => response.json())
+        .then(async (data) => {
+            await setHeroMetaData(data);
+            //console.log(data);
+        })
+
+        fetch("https://gateway.pinata.cloud/ipfs/QmRDZDm7zu9kpo2VAdB4GktB9PMKW3SUNJHGLciRoJTfuq")
+        .then(response => response.json())
+        .then((data) => {
+            setitemMetaData(data);
+            //console.log(data);
+        })
     }, [account, contract.methods])
 
-    async function requestHero(){
+    async function requestHero(){ // request new hero using provided value
         const seed = parseInt(document.getElementById('heroSeed').value);
         const name = document.getElementById('heroName').value;
         if(!Number.isInteger(seed)){
@@ -48,7 +70,7 @@ const Home = ({account, contract}) => {
         });
     }
 
-    async function requestItem(){
+    async function requestItem(){ // request new item using provided value
         const seed = parseInt(document.getElementById('itemSeed').value);
         if(!Number.isInteger(seed)){
             alert("Seed must be a Number.");
@@ -90,9 +112,13 @@ const Home = ({account, contract}) => {
                         </Form>
                         <hr/>
                         <div className="cards">
-                            {heros.map((hero) => (
-                                <HeroCard key={"H"+hero} Id={parseInt(hero)} contract={contract} />
-                            ))}
+                            {(heros) ? (
+                                heros.map((hero) => (
+                                    <HeroCard key={"H"+hero} Id={parseInt(hero)} metaData={heroMetaData} contract={contract} />
+                                ))
+                            ) : (
+                                <h3>You have not created any hero</h3>
+                            )}
                         </div>
                     </center>
                 </Col>
@@ -112,9 +138,14 @@ const Home = ({account, contract}) => {
                         </Form>
                         <hr/>
                         <div className="cards">
-                            {items.map((item) => (
-                                <ItemCard key={"I"+item} Id={parseInt(item)} contract={contract} />
-                            ))}
+                            {(items) ? (
+                                items.map((item) => (
+                                    <ItemCard key={"I"+item} Id={parseInt(item)} metaData={itemMetaData} contract={contract} />
+                                ))
+                            ) : (
+                                <h3>You have not created any hero</h3>
+                            )}
+
                         </div>
                     </center>
                 </Col>
