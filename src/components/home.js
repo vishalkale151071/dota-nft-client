@@ -114,7 +114,7 @@ const Home = ({account, contract}) => {
                         <div className="cards">
                             {(heros) ? (
                                 heros.map((hero) => (
-                                    <HeroCard key={"H"+hero} Id={parseInt(hero)} metaData={heroMetaData} contract={contract} />
+                                    <HeroCard key={"H"+hero} account={account} Id={parseInt(hero)} metaData={heroMetaData} contract={contract} />
                                 ))
                             ) : (
                                 <h3>You have not created any hero</h3>

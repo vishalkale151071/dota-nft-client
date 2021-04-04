@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './styles/style.css'
-
-const HeroCard = ({ Id, contract, metaData}) => {
+import Button from 'react-bootstrap/Button'
+const HeroCard = ({ Id, contract, metaData, account}) => {
 
     const [heroFirstHalf, setHeroFirstHalf] = useState(null); //hero variavle to hold hero data
     const [heroSecondHalf, setHeroSecondHalf] = useState(null); //hero variavle to hold hero data
@@ -20,8 +20,12 @@ const HeroCard = ({ Id, contract, metaData}) => {
         "tokenId": '5'
     }
     
+    async function levelUp(_tokenId){
+        await contract.methods.levelUp(_tokenId).send({from: account});
+    }
 
     useEffect(() => {
+
         contract.methods.getHeroFirstHalf(Id).call().then((result) => { // get hero from smart contract
             setHeroFirstHalf(result);
             //console.log("First : ", result);
@@ -116,6 +120,9 @@ const HeroCard = ({ Id, contract, metaData}) => {
                 </table>
                 </div>
             </figcaption> 
+            <Button variant="success" onClick={() => levelUp(Id)}>
+            Level-Up +1
+            </Button>
        </figure>):(
            <h3>Loading your hero</h3>
        )

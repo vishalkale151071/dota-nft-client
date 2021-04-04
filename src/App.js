@@ -28,7 +28,7 @@ class App extends Component {
         Dota.abi,
         deployedNetwork && deployedNetwork.address,
       );
-      console.log(instance._address);
+      console.log("contract address : ",instance._address);
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance }, this.runExample);

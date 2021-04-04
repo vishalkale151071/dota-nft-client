@@ -21,7 +21,7 @@ const ItemCard = ({ Id, contract, metaData}) => {
             </div>
             <figcaption className="card__caption">
                 <h1 className="card__name">{itemData.name}</h1>
-
+                {itemData.description}
                 <table className="card__stats">
                     <tbody>
                         {(itemData.Strength) && (<tr><th>Streangth</th><td>{itemData.Strength}</td></tr>)}
@@ -30,17 +30,17 @@ const ItemCard = ({ Id, contract, metaData}) => {
                         {(itemData.damage) && (<tr><th>Damage</th><td>{itemData.damage}</td></tr>)}
                     </tbody>
                 </table>
-                <div class="card__abilities">
+                <div className="card__abilities">
                     {(itemData.Active) && (
-                        <h4 class="card__ability">
+                        <h4 className="card__ability">
                             Active
-                            <span class="card__label">{itemData.Active}</span>
+                            <span className="card__label">{itemData.Active}</span>
                         </h4>
                     )}
                     {(itemData.Passive) && (
-                        <h4 class="card__ability">
+                        <h4 className="card__ability">
                             Passive
-                            <span class="card__label">{itemData.Passive}</span>
+                            <span className="card__label">{itemData.Passive}</span>
                     </h4>    
                     )}
                 </div>
