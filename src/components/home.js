@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
+import './styles/style.css';
 import HeroCard from './HeroCard';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import './styles/style.css';
 import Form from 'react-bootstrap/Form';
 import ItemCard from './ItemCard';
 // import * as heroData from '../metaData/Heros.json'; heros json data from local file
@@ -91,11 +91,11 @@ const Home = ({account, contract}) => {
             <Row>
                 <Col>
                     <center>
-                        <Form>
+                        <Form className="seed_form">
                             <Form.Group as={Row} controlId="heroSeed">
                                 <Form.Label column sm={2}>Seed value</Form.Label>
                                 <Col  sm={10}>
-                                    <Form.Control type="text" placeholder="78934590243789234789345" />
+                                    <Form.Control type="text" placeholder="789345902" />
                                 </Col>
                             </Form.Group>
 
@@ -124,11 +124,11 @@ const Home = ({account, contract}) => {
                 </Col>
                 <Col>
                     <center>
-                        <Form>
+                        <Form className="seed_form">
                             <Form.Group as={Row} controlId="itemSeed">
                                 <Form.Label column sm={2}>Seed value</Form.Label>
                                 <Col  sm={10}>
-                                    <Form.Control type="text" placeholder="9345902434578923478978" />
+                                    <Form.Control type="text" placeholder="93459434" />
                                 </Col>
                             </Form.Group>
                             

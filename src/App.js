@@ -3,6 +3,7 @@ import Dota from "./contracts/Dota.json";
 import getWeb3 from "./getWeb3";
 import { Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import "./App.css";
+import "./components/styles/bg.css"
 import './components/styles/footer.css'
 import Home from "./components/home";
 import Header from "./components/navbar";
@@ -27,7 +28,7 @@ class App extends Component {
         Dota.abi,
         deployedNetwork && deployedNetwork.address,
       );
-
+      console.log(instance._address);
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance }, this.runExample);
@@ -59,7 +60,10 @@ class App extends Component {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
     return (
-      <div>
+      <div className="main">
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
         <Router>
           <Header account={this.state.accounts[0]}/>
           <Switch>

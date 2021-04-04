@@ -60,6 +60,21 @@ h1, h2, h3, h4, h5 {
   background: #bbbbbb;
   font-size: medium;
 }
+
+.card-level {
+  position: absolute;
+  top: .25em;
+  right: 0.3em;
+  color: #000000;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  border-radius: 50%;
+  background:#FFD700;
+  width: 30px;
+  height: 30px;
+  padding-bottom: .5em;
+}
+
 .card__label {
   font-size: 10px;
   text-transform: uppercase;
@@ -169,7 +184,7 @@ h1, h2, h3, h4, h5 {
 .card:hover {
   z-index: 5;
   box-shadow: 0px 13px 30px -15px #000000;
-  transform: translateY(-10px) scale(1.25);
+  transform: translateY(-10px) scale(1.050);
 }
 
 .ability_image {
@@ -181,4 +196,12 @@ h1, h2, h3, h4, h5 {
 .Item-image{
   height: 260px;
   width: 266px;
+}
+
+.col-form-label {
+  color: white;
+}
+
+.seed_form {
+  margin-top: 5em;
 }

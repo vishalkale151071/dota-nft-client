@@ -24,12 +24,12 @@ const HeroCard = ({ Id, contract, metaData}) => {
     useEffect(() => {
         contract.methods.getHeroFirstHalf(Id).call().then((result) => { // get hero from smart contract
             setHeroFirstHalf(result);
-            console.log("First : ", result);
+            //console.log("First : ", result);
         });
         
         contract.methods.getHeroSecondHalf(Id).call().then((result) => { // get hero from smart contract
             setHeroSecondHalf(result);
-            console.log("Second : ", result);
+            //console.log("Second : ", result);
         });
 
     }, [Id, contract.methods, heroObject.heroCode])
@@ -38,13 +38,14 @@ const HeroCard = ({ Id, contract, metaData}) => {
         (heroFirstHalf && heroSecondHalf)?(
        <figure className={"card " + metaData[heroFirstHalf[heroObject.heroCode]].primaryAttribute}>
             <div className="card__image-container">
-                <img src={metaData[heroFirstHalf[heroObject.heroCode]].image} alt="Vaporeon" className="card__image" />   
+                <img src={metaData[heroFirstHalf[heroObject.heroCode]].image} alt="Vaporeon" className="card__image" />
+                <h3 className="card-level">{heroFirstHalf[heroObject.level]}</h3>   
             </div>
             <figcaption className="card__caption">
                 <h1 className="card__name">{heroFirstHalf[heroObject.name] + " (" + metaData[heroFirstHalf[heroObject.heroCode]].name + ")"}</h1>
 
                 <h3 className="card__type">{metaData[heroFirstHalf[heroObject.heroCode]].primaryAttribute}</h3>
-
+                
                 <table className="card__stats">
                 <tbody>
                 <tr>

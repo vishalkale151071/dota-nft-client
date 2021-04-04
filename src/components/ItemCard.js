@@ -15,7 +15,7 @@ const ItemCard = ({ Id, contract, metaData}) => {
     
     return(
         (item)?(
-       <figure className="card card--normal">
+       <figure className="card card--electric">
             <div className="card__image-container">
                 <img className="Item-image" src={itemData.image} alt={item['0']} />   
             </div>
@@ -24,16 +24,25 @@ const ItemCard = ({ Id, contract, metaData}) => {
 
                 <table className="card__stats">
                     <tbody>
-                        {(itemData.Strength) ? (<tr><th>Streangth</th><td>{itemData.Strength}</td></tr>): (null)}
-                        {(itemData.Agility) ? (<tr><th>Agility</th><td>{itemData.Agility}</td></tr>): (null)}
-                        {(itemData.Intelligence) ? (<tr><th>Intelligence</th><td>{itemData.Intelligence}</td></tr>): (null)}
+                        {(itemData.Strength) && (<tr><th>Streangth</th><td>{itemData.Strength}</td></tr>)}
+                        {(itemData.Agility) && (<tr><th>Agility</th><td>{itemData.Agility}</td></tr>)}
+                        {(itemData.Intelligence) && (<tr><th>Intelligence</th><td>{itemData.Intelligence}</td></tr>)}
+                        {(itemData.damage) && (<tr><th>Damage</th><td>{itemData.damage}</td></tr>)}
                     </tbody>
                 </table>
-                
-                <div className="card__abilities">
-                <h4 className="card__ability">
-                    <span className="card__label">Enhancement</span>
-                </h4>
+                <div class="card__abilities">
+                    {(itemData.Active) && (
+                        <h4 class="card__ability">
+                            Active
+                            <span class="card__label">{itemData.Active}</span>
+                        </h4>
+                    )}
+                    {(itemData.Passive) && (
+                        <h4 class="card__ability">
+                            Passive
+                            <span class="card__label">{itemData.Passive}</span>
+                    </h4>    
+                    )}
                 </div>
             </figcaption> 
        </figure>):(
