@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './styles/style.css'
-import Button from 'react-bootstrap/Button'
+import { useHistory } from 'react-router';
+import Inventory from './Inventory';
 const HeroCard = ({ Id, contract, metaData, account}) => {
 
     const [heroFirstHalf, setHeroFirstHalf] = useState(null); //hero variavle to hold hero data
     const [heroSecondHalf, setHeroSecondHalf] = useState(null); //hero variavle to hold hero data
+    const history = useHistory();
     const heroObject = { // mapping from function return index from solidity to attribute for easier operations
         "heroCode": '0',
         "name": '1',
@@ -18,10 +20,6 @@ const HeroCard = ({ Id, contract, metaData, account}) => {
         "movementSpeed": '3',
         "armor": '4',
         "tokenId": '5'
-    }
-    
-    async function levelUp(_tokenId){
-        await contract.methods.levelUp(_tokenId).send({from: account});
     }
 
     useEffect(() => {
@@ -38,9 +36,14 @@ const HeroCard = ({ Id, contract, metaData, account}) => {
 
     }, [Id, contract.methods, heroObject.heroCode])
     
+    function goToDetails() {
+        history.push(`/heros/${Id}`);
+    }
+
     return(
         (heroFirstHalf && heroSecondHalf)?(
-       <figure className={"card " + metaData[heroFirstHalf[heroObject.heroCode]].primaryAttribute}>
+        <>
+            <figure onClick={goToDetails} className={"vishal " + metaData[heroFirstHalf[heroObject.heroCode]].primaryAttribute}>
             <div className="card__image-container">
                 <img src={metaData[heroFirstHalf[heroObject.heroCode]].image} alt="Vaporeon" className="card__image" />
                 <h3 className="card-level">{heroFirstHalf[heroObject.level]}</h3>   
@@ -88,42 +91,41 @@ const HeroCard = ({ Id, contract, metaData, account}) => {
                 </tbody></table>
                 
                 <div className="card__abilities">
-                <table>
-                    <tbody>
-                        <tr>
-                            <th><img className="ability_image" alt={metaData[heroFirstHalf[heroObject.heroCode]].ability1.name} src={metaData[heroFirstHalf[heroObject.heroCode]].ability1.image} 
-                                title={
-                                       " Name : " + metaData[heroFirstHalf[heroObject.heroCode]].ability1.name + " \n" +
-                                        "Description: " + metaData[heroFirstHalf[heroObject.heroCode]].ability1.description
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th><img className="ability_image" alt={metaData[heroFirstHalf[heroObject.heroCode]].ability1.name} src={metaData[heroFirstHalf[heroObject.heroCode]].ability1.image} 
+                                    title={
+                                        " Name : " + metaData[heroFirstHalf[heroObject.heroCode]].ability1.name + " \n" +
+                                            "Description: " + metaData[heroFirstHalf[heroObject.heroCode]].ability1.description
+                                    }
+                                /></th>
+                                <th><img className="ability_image" alt={metaData[heroFirstHalf[heroObject.heroCode]].ability2.name} src={metaData[heroFirstHalf[heroObject.heroCode]].ability2.image} 
+                                    title={
+                                        " Name : " + metaData[heroFirstHalf[heroObject.heroCode]].ability2.name + " \n" +
+                                        "Description: " + metaData[heroFirstHalf[heroObject.heroCode]].ability2.description
                                 }
-                            /></th>
-                            <th><img className="ability_image" alt={metaData[heroFirstHalf[heroObject.heroCode]].ability2.name} src={metaData[heroFirstHalf[heroObject.heroCode]].ability2.image} 
-                                title={
-                                    " Name : " + metaData[heroFirstHalf[heroObject.heroCode]].ability2.name + " \n" +
-                                     "Description: " + metaData[heroFirstHalf[heroObject.heroCode]].ability2.description
-                             }
-                            /></th>
-                            <th><img className="ability_image" alt={metaData[heroFirstHalf[heroObject.heroCode]].ability3.name} src={metaData[heroFirstHalf[heroObject.heroCode]].ability3.image} 
-                                title={
-                                    " Name : " + metaData[heroFirstHalf[heroObject.heroCode]].ability3.name + " \n" +
-                                     "Description: " + metaData[heroFirstHalf[heroObject.heroCode]].ability3.description
-                             }
-                            /></th>
-                            <th><img className="ability_image" alt={metaData[heroFirstHalf[heroObject.heroCode]].ability4.name} src={metaData[heroFirstHalf[heroObject.heroCode]].ability4.image} 
-                                title={
-                                    " Name : " + metaData[heroFirstHalf[heroObject.heroCode]].ability4.name + " \n" +
-                                     "Description: " + metaData[heroFirstHalf[heroObject.heroCode]].ability4.description
-                             }
-                            /></th>
-                        </tr>
-                    </tbody>
-                </table>
+                                /></th>
+                                <th><img className="ability_image" alt={metaData[heroFirstHalf[heroObject.heroCode]].ability3.name} src={metaData[heroFirstHalf[heroObject.heroCode]].ability3.image} 
+                                    title={
+                                        " Name : " + metaData[heroFirstHalf[heroObject.heroCode]].ability3.name + " \n" +
+                                        "Description: " + metaData[heroFirstHalf[heroObject.heroCode]].ability3.description
+                                }
+                                /></th>
+                                <th><img className="ability_image" alt={metaData[heroFirstHalf[heroObject.heroCode]].ability4.name} src={metaData[heroFirstHalf[heroObject.heroCode]].ability4.image} 
+                                    title={
+                                        " Name : " + metaData[heroFirstHalf[heroObject.heroCode]].ability4.name + " \n" +
+                                        "Description: " + metaData[heroFirstHalf[heroObject.heroCode]].ability4.description
+                                }
+                                /></th>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <Inventory />
             </figcaption> 
-            <Button variant="success" onClick={() => levelUp(Id)}>
-            Level-Up +1
-            </Button>
-       </figure>):(
+            </figure>
+       </>):(
            <h3>Loading your hero</h3>
        )
     );

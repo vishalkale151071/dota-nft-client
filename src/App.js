@@ -1,6 +1,6 @@
 import React, { Component,} from "react";
 import Dota from "./contracts/Dota.json";
-import getWeb3 from "./getWeb3";
+import getWeb3 from "./components/getWeb3";
 import { Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import "./App.css";
 import "./components/styles/bg.css"
@@ -9,6 +9,9 @@ import Home from "./components/home";
 import Header from "./components/navbar";
 import Heros from "./components/Heros";
 import Footer from "./components/Footer";
+import Items from "./components/Items";
+import HeroDetails from "./components/HeroDetails";
+import EquipItem from "./components/EquipItem";
 
 class App extends Component {
   state = { web3: null, accounts: null, contract: null };
@@ -44,20 +47,22 @@ class App extends Component {
   };
 
   runExample = async () => {
-    //const { accounts, contract } = this.state;
-
-    // Stores a given value, 5 by default.
-    //await contract.methods.requestHero(12345, "Vishal").send({from: accounts[0]})
-    //let response = await contract.methods.withdrawLink().send({from: accounts[0]});
-    // this.setState({storageValue: response})
-    //console.log(response)
-    // Get the value from the contract to prove it worked.
-    // Update state with the result.
+    // const { accounts, contract } = this.state;
+    // await contract.methods.requestHero(123456, "Peekaboo").send({from: accounts[0]});
+    // await contract.methods.requestHero(345612, "Rexy").send({from: accounts[0]});
+    // await contract.methods.requestHero(561234, "Woody").send({from: accounts[0]});
+    // await contract.methods.requestItem(561234).send({from: accounts[0]});
+    // await contract.methods.requestItem(213561234).send({from: accounts[0]});
+    // await contract.methods.requestItem(52361234).send({from: accounts[0]});
+    // await contract.methods.requestItem(5641234).send({from: accounts[0]});
+    // await contract.methods.requestItem(56211234).send({from: accounts[0]});
+    // await contract.methods.requestItem(56132234).send({from: accounts[0]});
+    // await contract.methods.requestItem(561123234).send({from: accounts[0]});
   };
 
   render() {
     if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
+      return(<div>Loading Web3, accounts, and contract...</div>);
     }
     return (
       <div className="main">
@@ -68,7 +73,10 @@ class App extends Component {
           <Header account={this.state.accounts[0]}/>
           <Switch>
             <Route path ='/' exact component={() => (<Home account={this.state.accounts[0]} contract={this.state.contract}></Home>)}></Route>
-            <Route path ='/heros' exact component= {Heros}></Route>
+            <Route path ='/heros' exact component={() => (<Heros account={this.state.accounts[0]} contract={this.state.contract}/>)}></Route>
+            <Route path = '/items' exact component={() => (<Items account={this.state.accounts[0]} contract={this.state.contract}/>)}></Route>
+            <Route path = '/heros/:id' exact component={() => (<HeroDetails contract={this.state.contract} account={this.state.accounts[0]}/>)}></Route>
+            <Route path = '/hero/equip/:id' exact component={() => (<EquipItem contract={this.state.contract} account={this.state.accounts[0]}/>)}></Route>
           </Switch>
           <Footer />
         </Router>

@@ -1,0 +1,20 @@
+.owner {
+    color: white;
+    display: inline-block;
+    margin-left: 5em;
+    margin-bottom: 30px;
+}
+
+.description {
+    padding: 1em;
+}
+
+.inventory {
+    border: solid grey 1px;
+    height: 50px;
+    margin: 10px;
+    background-color: black;
+    color: white;
+    font-size: x-small;
+    max-width: 50px;
+}

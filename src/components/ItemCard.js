@@ -3,7 +3,7 @@ import './styles/style.css'
 
 const ItemCard = ({ Id, contract, metaData}) => {
     
-    const [item, setItem] = useState(null); // item variable to hold item
+    const [item, setItem] = useState(false); // item variable to hold item
     const [itemData, setItemData] = useState({}); // itemData variable to hold item metaData
     
     useEffect(() => {
@@ -15,40 +15,40 @@ const ItemCard = ({ Id, contract, metaData}) => {
     
     return(
         (item)?(
-       <figure className="card card--electric">
-            <div className="card__image-container">
-                <img className="Item-image" src={itemData.image} alt={item['0']} />   
-            </div>
-            <figcaption className="card__caption">
-                <h1 className="card__name">{itemData.name}</h1>
-                {itemData.description}
-                <table className="card__stats">
-                    <tbody>
-                        {(itemData.Strength) && (<tr><th>Streangth</th><td>{itemData.Strength}</td></tr>)}
-                        {(itemData.Agility) && (<tr><th>Agility</th><td>{itemData.Agility}</td></tr>)}
-                        {(itemData.Intelligence) && (<tr><th>Intelligence</th><td>{itemData.Intelligence}</td></tr>)}
-                        {(itemData.damage) && (<tr><th>Damage</th><td>{itemData.damage}</td></tr>)}
-                    </tbody>
-                </table>
-                <div className="card__abilities">
-                    {(itemData.Active) && (
-                        <h4 className="card__ability">
-                            Active
-                            <span className="card__label">{itemData.Active}</span>
-                        </h4>
-                    )}
-                    {(itemData.Passive) && (
-                        <h4 className="card__ability">
-                            Passive
-                            <span className="card__label">{itemData.Passive}</span>
-                    </h4>    
-                    )}
+            <figure className="vishal card--electric">
+                <div className="card__image-container">
+                    <img className="Item-image" src={itemData.image} alt={item['0']} />   
                 </div>
-            </figcaption> 
-       </figure>):(
+                <figcaption className="card__caption">
+                    <h1 className="card__name">{itemData.name}</h1>
+                    {itemData.description}
+                    <table className="card__stats">
+                        <tbody>
+                            {(itemData.Strength) && (<tr><th>Streangth</th><td>{itemData.Strength}</td></tr>)}
+                            {(itemData.Agility) && (<tr><th>Agility</th><td>{itemData.Agility}</td></tr>)}
+                            {(itemData.Intelligence) && (<tr><th>Intelligence</th><td>{itemData.Intelligence}</td></tr>)}
+                            {(itemData.damage) && (<tr><th>Damage</th><td>{itemData.damage}</td></tr>)}
+                        </tbody>
+                    </table>
+                    <div className="card__abilities">
+                        {(itemData.Active) && (
+                            <h4 className="card__ability">
+                                Active
+                                <span className="card__label">{itemData.Active}</span>
+                            </h4>
+                        )}
+                        {(itemData.Passive) && (
+                            <h4 className="card__ability">
+                                Passive
+                                <span className="card__label">{itemData.Passive}</span>
+                        </h4>    
+                        )}
+                    </div>
+                </figcaption> 
+            </figure>):(
            <h3>Loading your item</h3>
        )
-    );
+    )
 }
 
 export default ItemCard
