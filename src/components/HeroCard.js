@@ -40,7 +40,7 @@ const HeroCard = ({ Id, contract, metaData, account}) => {
     }
 
     return(
-        (heroFirstHalf && heroSecondHalf)?(
+        (heroFirstHalf && heroSecondHalf && metaData)?(
         <>
             <figure className={"vishal " + metaData[heroFirstHalf[heroObject.heroCode]].primaryAttribute}>
             <div className="card__image-container">

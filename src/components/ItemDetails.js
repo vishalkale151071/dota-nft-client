@@ -8,7 +8,7 @@ const ItemDetails = ({account, contract}) => {
     const [metaData, setItemMetaData] = useState(null);
     const [owner, setOwner] = useState('');
     
-     useEffect(() => {
+    useEffect(() => {
         fetch("https://gateway.pinata.cloud/ipfs/QmRDZDm7zu9kpo2VAdB4GktB9PMKW3SUNJHGLciRoJTfuq")
         .then(response => response.json())
         .then((data) => {
@@ -22,7 +22,7 @@ const ItemDetails = ({account, contract}) => {
         .then(result => {setOwner(result)});
     },[contract.methods, id])
     return (
-        <>
+        (metaData) && (<>
             <Row>
                 <center>
                     <h2 className="heading">DOTA heros</h2>
@@ -72,7 +72,7 @@ const ItemDetails = ({account, contract}) => {
                     </div>
                 </Col>
             </Row>
-        </>
+        </>)
     );
 }
 

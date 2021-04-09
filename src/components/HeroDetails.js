@@ -9,7 +9,7 @@ import '../components/styles/owner.css';
 const HeroDetails = ({contract, account}) => {
     const {id} = useParams();
     const history = useHistory();
-    const[metaData, setHeroMetaData] = useState(null);
+    const[metaData, setHeroMetaData] = useState(false);
     const [owner, setOwner] = useState('')
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const HeroDetails = ({contract, account}) => {
     },[])
 
     useEffect(() => {
-        contract.methods.getItemOwner(id).call().then((result) => {
+        contract.methods.getHeroOwner(id).call().then((result) => {
             setOwner(result);
         })
     },[contract.methods, id]);
@@ -36,7 +36,7 @@ const HeroDetails = ({contract, account}) => {
     }
 
     return(
-        <>
+        (metaData) && (<>
             <Row>
                     <h2 className="heading">DOTA heros</h2>
             </Row>
@@ -84,7 +84,7 @@ const HeroDetails = ({contract, account}) => {
                     </div>
                 </Col>
             </Row>
-        </> 
+        </>) 
     )
 }
 
