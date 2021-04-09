@@ -23,7 +23,6 @@ const HeroCard = ({ Id, contract, metaData, account}) => {
     }
 
     useEffect(() => {
-
         contract.methods.getHeroFirstHalf(Id).call().then((result) => { // get hero from smart contract
             setHeroFirstHalf(result);
             //console.log("First : ", result);
@@ -43,9 +42,9 @@ const HeroCard = ({ Id, contract, metaData, account}) => {
     return(
         (heroFirstHalf && heroSecondHalf)?(
         <>
-            <figure onClick={goToDetails} className={"vishal " + metaData[heroFirstHalf[heroObject.heroCode]].primaryAttribute}>
+            <figure className={"vishal " + metaData[heroFirstHalf[heroObject.heroCode]].primaryAttribute}>
             <div className="card__image-container">
-                <img src={metaData[heroFirstHalf[heroObject.heroCode]].image} alt="Vaporeon" className="card__image" />
+                <img onClick={goToDetails} src={metaData[heroFirstHalf[heroObject.heroCode]].image} alt="Vaporeon" className="card__image" />
                 <h3 className="card-level">{heroFirstHalf[heroObject.level]}</h3>   
             </div>
             <figcaption className="card__caption">
@@ -122,7 +121,7 @@ const HeroCard = ({ Id, contract, metaData, account}) => {
                         </tbody>
                     </table>
                 </div>
-                <Inventory />
+                <Inventory contract={contract} id={Id}/>
             </figcaption> 
             </figure>
        </>):(

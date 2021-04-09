@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import Items from "./components/Items";
 import HeroDetails from "./components/HeroDetails";
 import EquipItem from "./components/EquipItem";
+import ItemDetails from "./components/ItemDetails";
 
 class App extends Component {
   state = { web3: null, accounts: null, contract: null };
@@ -48,6 +49,7 @@ class App extends Component {
 
   runExample = async () => {
     // const { accounts, contract } = this.state;
+    // await contract.methods.withdrawLink().send({from: accounts[0]})
     // await contract.methods.requestHero(123456, "Peekaboo").send({from: accounts[0]});
     // await contract.methods.requestHero(345612, "Rexy").send({from: accounts[0]});
     // await contract.methods.requestHero(561234, "Woody").send({from: accounts[0]});
@@ -72,11 +74,12 @@ class App extends Component {
         <Router>
           <Header account={this.state.accounts[0]}/>
           <Switch>
-            <Route path ='/' exact component={() => (<Home account={this.state.accounts[0]} contract={this.state.contract}></Home>)}></Route>
-            <Route path ='/heros' exact component={() => (<Heros account={this.state.accounts[0]} contract={this.state.contract}/>)}></Route>
-            <Route path = '/items' exact component={() => (<Items account={this.state.accounts[0]} contract={this.state.contract}/>)}></Route>
+            <Route path = '/' exact component={() => (<Home account={this.state.accounts[0]} contract={this.state.contract}></Home>)}></Route>
+            <Route path = '/heros' exact component={() => (<Heros account={this.state.accounts[0]} contract={this.state.contract}/>)}></Route>
             <Route path = '/heros/:id' exact component={() => (<HeroDetails contract={this.state.contract} account={this.state.accounts[0]}/>)}></Route>
             <Route path = '/hero/equip/:id' exact component={() => (<EquipItem contract={this.state.contract} account={this.state.accounts[0]}/>)}></Route>
+            <Route path = '/items' exact component={() => (<Items account={this.state.accounts[0]} contract={this.state.contract}/>)}></Route>
+            <Route path = '/items/:id' exact component={() => (<ItemDetails account={this.state.accounts[0]} contract={this.state.contract}/>)}></Route>
           </Switch>
           <Footer />
         </Router>

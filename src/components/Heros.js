@@ -4,15 +4,17 @@ import '../components/styles/style.css'
 const Heros = ({contract, account}) => {
     const [heros, setHeros] = useState(0);
     const [metaDate, setHeroMetaData] = useState(null);
+    
     useEffect(() => {
-        
         fetch("https://gateway.pinata.cloud/ipfs/QmVNdiUfYGZhfAcBpFj87KmaYDU9rbSU25Wjgnu1aJHwDu")
         .then(response => response.json())
         .then(async (data) => {
             await setHeroMetaData(data);
             //console.log(data);
         })
-        
+    },[]);
+
+    useEffect(() => {        
         contract.methods.getHeroCount().call()
         .then(result => {
             setHeros(result);

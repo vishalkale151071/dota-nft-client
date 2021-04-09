@@ -1,54 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
-import HeroCard from './HeroCard';
-import Button from 'react-bootstrap/Button';
-import  Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import { useParams } from 'react-router';
+import { Row, Col, Button} from 'react-bootstrap';
 import '../components/styles/owner.css';
-
-const HeroDetails = ({contract, account}) => {
+import ItemCard from './ItemCard';
+const ItemDetails = ({account, contract}) => {
     const {id} = useParams();
-    const history = useHistory();
-    const[metaData, setHeroMetaData] = useState(null);
-    const [owner, setOwner] = useState('')
-
-    useEffect(() => {
-        fetch("https://gateway.pinata.cloud/ipfs/QmVNdiUfYGZhfAcBpFj87KmaYDU9rbSU25Wjgnu1aJHwDu")
+    const [metaData, setItemMetaData] = useState(null);
+    const [owner, setOwner] = useState('');
+    
+     useEffect(() => {
+        fetch("https://gateway.pinata.cloud/ipfs/QmRDZDm7zu9kpo2VAdB4GktB9PMKW3SUNJHGLciRoJTfuq")
         .then(response => response.json())
         .then((data) => {
-            setHeroMetaData(data);
+            setItemMetaData(data);
             //console.log(data);
-        });
-    },[])
+        })
+    }, []);
 
     useEffect(() => {
-        contract.methods.getItemOwner(id).call().then((result) => {
-            setOwner(result);
-        })
-    },[contract.methods, id]);
-
-    function levelUp(_tokenId){
-        contract.methods.levelUp(_tokenId).send({from: account});
-    }
-
-    function equip(){
-        history.push(`/hero/equip/${id}`);
-    }
-
-    return(
+        contract.methods.getItemOwner(id).call()
+        .then(result => {setOwner(result)});
+    },[contract.methods, id])
+    return (
         <>
             <Row>
+                <center>
                     <h2 className="heading">DOTA heros</h2>
+                </center>
             </Row>
             <Row>
                 <Col lg={3} md={6}>
-                    <HeroCard key={"H"+id} Id={parseInt(id)} contract={contract} metaData={metaData}/>
+                    <ItemCard key={"I"+id} Id={parseInt(id)} contract={contract} metaData={metaData}/>
                 </Col>
                 <Col lg={9} md={6}>
                     <div className="owner">
                         <h3>Owned by : {owner}</h3>
                         <hr color="white"></hr>
-                        <Button variant="success" onClick={() => levelUp(id)}>
+                        <Button variant="success">
                             Battle
                         </Button>
                         <br />
@@ -59,7 +47,7 @@ const HeroDetails = ({contract, account}) => {
                         <hr color="white"/>
                         <Row>
                         <Col sm={6}>
-                            <Button variant="danger" onClick={() => equip()}>
+                            <Button variant="danger">
                                 Equip Item
                             </Button>
                             <br />
@@ -71,7 +59,7 @@ const HeroDetails = ({contract, account}) => {
                             </div>
                         </Col>
                         <Col sm={6}>
-                            <Button variant="primary" onClick={() => equip()}>
+                            <Button variant="primary">
                                 Remove Item
                             </Button>
                             <br />
@@ -84,8 +72,8 @@ const HeroDetails = ({contract, account}) => {
                     </div>
                 </Col>
             </Row>
-        </> 
-    )
+        </>
+    );
 }
 
-export default HeroDetails
+export default ItemDetails

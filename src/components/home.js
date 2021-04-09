@@ -20,7 +20,7 @@ const Home = ({account, contract}) => {
     useEffect(() => {
         //setHeroMetaData(heroData.default); heros json data from local file
         //setitemMetaData(itemData.default); items json data from local file
-        fetch("https://gateway.pinata.cloud/ipfs/QmVNdiUfYGZhfAcBpFj87KmaYDU9rbSU25Wjgnu1aJHwDu")
+         fetch("https://gateway.pinata.cloud/ipfs/QmVNdiUfYGZhfAcBpFj87KmaYDU9rbSU25Wjgnu1aJHwDu")
         .then(response => response.json())
         .then((data) => {
             setHeroMetaData(data);
@@ -33,7 +33,9 @@ const Home = ({account, contract}) => {
             setitemMetaData(data);
             //console.log(data);
         })
+    }, []);
 
+    useEffect(() => {
         contract.methods.getItemNFTs(account).call((error, result) => {
             if(result){
                 setItems(result);

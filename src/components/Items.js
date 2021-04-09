@@ -11,7 +11,9 @@ const Items = ({ account, contract}) => {
         .then(async (data) => {
             await setItemMetaData(data);
         })
+    }, []);
 
+    useEffect(() => {
         contract.methods.getItemCount().call()
         .then(result => {
             setItems(result)
