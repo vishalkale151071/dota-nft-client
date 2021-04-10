@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import '../components/styles/owner.css';
 import web3 from 'web3';
 import swal from 'sweetalert';
+
 const HeroDetails = ({contract, account}) => {
     const {id} = useParams();
     const history = useHistory();
@@ -47,7 +48,7 @@ const HeroDetails = ({contract, account}) => {
                     swal({
                         title: "congratulations.",
                         text: `Your hero's level is ${event.returnValues._level}`,
-                    }).then(() => (history.push(`/heroes/${id}`)));
+                    }).then(() => (window.location.reload()));
                 }else{
                     console.log(error);
                 }
