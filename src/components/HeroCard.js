@@ -36,7 +36,7 @@ const HeroCard = ({ Id, contract, metaData, account}) => {
     }, [Id, contract.methods, heroObject.heroCode])
     
     function goToDetails() {
-        history.push(`/heros/${Id}`);
+        history.push(`/heroes/${Id}`);
     }
 
     return(
