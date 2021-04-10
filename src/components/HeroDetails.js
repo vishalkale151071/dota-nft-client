@@ -47,7 +47,7 @@ const HeroDetails = ({contract, account}) => {
                     swal({
                         title: "congratulations.",
                         text: `Your hero's level is ${event.returnValues._level}`,
-                    }).then(() => (window.location.reload()));
+                    }).then(() => (history.push(`/heroes/${id}`)));
                 }else{
                     console.log(error);
                 }
