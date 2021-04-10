@@ -1,68 +1,60 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Dota NFTs - chainlink hackathon
+Hi, I am Vishal, this is my project for **chainlink hackathon**.
+Here you can create 2 NFTs :-
+- Hero
+- Item
+	- each **Hero** will have its own attributes like **Strength**, **Agility**, **Intelligence**, **Damage**, **Armor**, etc.  which will be generated **randomly**.
+	- each **Item** also have fixed attributes.
+	- you can go for **battel** to level up your hero. which will increase your hero's **attributes**
+	- In this project **ERC721** token is used and **chainlinks VRFConsumerBase** for randomness of heroes.
+## Deployed at  https://wizardly-sinoussi-597c78.netlify.app
 
-## Available Scripts
+## Run project locally
+- replace domain name with **localhost:3000**
 
-In the project directory, you can run:
+> git clone https://github.com/vishalkale151071/dota-nft-client.git
 
-### `yarn start`
+> cd dota-nft-client
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> npm install
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+>npm start
 
-### `yarn test`
+### Requirements
+- Metamask
+- Rinkeby network.
+- You will need 0.001 eth for **Create hero**, **Create Item**, **levelUp** and ** Equip Item**.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Create hero
+- Go to https://wizardly-sinoussi-597c78.netlify.app/ . and activate your **metamask**.
+- Fill the **seedvalue** with random number and give your hero a name.
+- Click on **Create Hero** button.
+- Accept the **metamask** transaction.
+- Wait for some time an you'll see an **alert** that your hero is created.
 
-### `yarn build`
+### Create Item
+- Go to https://wizardly-sinoussi-597c78.netlify.app/ . and activate your **metamask**.
+- Fill the **seedvalue** with random number and give your hero a name.
+- Click on **Create Item** button.
+- Accept the **metamask** transaction.
+- Wait for some time an you'll see an **alert** that your item is created.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### level-up Hero
+-  Go to https://wizardly-sinoussi-597c78.netlify.app/ and **click** on your **hero image** on card. 
+- You will be redirected to **hero details page**.
+- There you'll see the **battle** button, click on it.
+- Accept the **metamask** transaction.
+- Wait for some time an you'll see an **alert** that your hero is leveled up.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Equip Items
+-  Go to https://wizardly-sinoussi-597c78.netlify.app/ and **click** on your **hero image** on card. 
+- You will be redirected to **hero details page**.
+- There you'll see the **Equip Item** button, click on it.
+- Select the item you want to equip.
+- Wait for some time and go to home page. your item will be in your hero card.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### See all created heroes
+- Go to https://wizardly-sinoussi-597c78.netlify.app/heros
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### sell all created items
+- Go to https://wizardly-sinoussi-597c78.netlify.app/items
