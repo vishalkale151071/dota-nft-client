@@ -73,7 +73,7 @@ const HeroDetails = ({contract, account}) => {
                     <div className="owner">
                         <h3>Owned by : {owner}</h3>
                         <hr color="white"></hr>
-                        <Button variant="success" onClick={() => levelUp(id)}>
+                        <Button variant="success" onClick={() => levelUp(id)} disabled={flag}>
                         {loading && animation}Battle
                         </Button>
                         <br />
